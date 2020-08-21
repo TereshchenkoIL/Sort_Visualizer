@@ -1,0 +1,15 @@
+D:\Projects\C#\Sort_Vizualizer\Sort_Vizualizer\bin\Debug\Sort_Vizualizer.exe.config
+D:\Projects\C#\Sort_Vizualizer\Sort_Vizualizer\bin\Debug\Sort_Vizualizer.exe
+D:\Projects\C#\Sort_Vizualizer\Sort_Vizualizer\bin\Debug\Sort_Vizualizer.pdb
+D:\Projects\C#\Sort_Vizualizer\Sort_Vizualizer\obj\Debug\Sort_Vizualizer.csprojAssemblyReference.cache
+D:\Projects\C#\Sort_Vizualizer\Sort_Vizualizer\obj\Debug\MainWindow.g.cs
+D:\Projects\C#\Sort_Vizualizer\Sort_Vizualizer\obj\Debug\App.g.cs
+D:\Projects\C#\Sort_Vizualizer\Sort_Vizualizer\obj\Debug\Sort_Vizualizer_MarkupCompile.cache
+D:\Projects\C#\Sort_Vizualizer\Sort_Vizualizer\obj\Debug\Sort_Vizualizer_MarkupCompile.lref
+D:\Projects\C#\Sort_Vizualizer\Sort_Vizualizer\obj\Debug\MainWindow.baml
+D:\Projects\C#\Sort_Vizualizer\Sort_Vizualizer\obj\Debug\Sort_Vizualizer.g.resources
+D:\Projects\C#\Sort_Vizualizer\Sort_Vizualizer\obj\Debug\Sort_Vizualizer.Properties.Resources.resources
+D:\Projects\C#\Sort_Vizualizer\Sort_Vizualizer\obj\Debug\Sort_Vizualizer.csproj.GenerateResource.cache
+D:\Projects\C#\Sort_Vizualizer\Sort_Vizualizer\obj\Debug\Sort_Vizualizer.csproj.CoreCompileInputs.cache
+D:\Projects\C#\Sort_Vizualizer\Sort_Vizualizer\obj\Debug\Sort_Vizualizer.exe
+D:\Projects\C#\Sort_Vizualizer\Sort_Vizualizer\obj\Debug\Sort_Vizualizer.pdb

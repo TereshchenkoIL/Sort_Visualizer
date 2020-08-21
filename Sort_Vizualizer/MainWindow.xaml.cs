@@ -38,7 +38,8 @@ namespace Sort_Vizualizer
         {
             sortingThread = new Thread(() =>
             {
-                Bubble_sort();
+                //Bubble_sort();
+                QuickSort();
             });
             sortingThread.Start();
 
@@ -46,7 +47,8 @@ namespace Sort_Vizualizer
 
         private void Init_Click(object sender, RoutedEventArgs e)
         {
-            
+            if(sortingThread != null)  sortingThread.Abort();
+        
             string[] strs = Numbers.Text.Split(' ');
             arr = new int[strs.Length];
             rects = new Rectangle[strs.Length];
@@ -141,6 +143,52 @@ namespace Sort_Vizualizer
             }
 
         }
+        private void QuickSort()
+        {
+            Quick(0, arr.Length-1);
+        }
+
+        private void Quick(int lo, int hi)
+        {
+            if (lo >= hi) return;
+            int point = Partition(lo, hi);
+            Quick(lo, point);
+            Quick(point + 1, hi);
+
+        }
+
+        private int Partition(int lo, int hi)
+        {
+            int i = lo;
+            int j = hi + 1;
+            Set_Color(lo, Brushes.Purple);
+            while(true)
+            {
+                while(arr[++i] < arr[lo])
+                {
+                    Set_Color(i , Brushes.Blue);
+                    Thread.Sleep(400);
+                    Set_Color(i , Brushes.Coral);
+                    if (i == hi) break;
+                }
+                while(arr[lo] < arr[--j])
+                {
+                    Set_Color(j, Brushes.Blue);
+                    Thread.Sleep(400);
+                    Set_Color(j, Brushes.Coral);
+                    if (j == lo) break;
+                }
+                Set_Orange(i, j);
+                Thread.Sleep(300);
+                if (i >= j) break;
+                Swap(i, j);
+            }
+            Swap(lo, j);
+            Thread.Sleep(300);
+          
+            return j;
+
+        }
    
         public void Set_Orange(int i, int j)
         {
@@ -166,6 +214,13 @@ namespace Sort_Vizualizer
             });
         }
 
+        public void Set_Color(int i, SolidColorBrush color )
+        {
+            this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
+            {
+                rects[i].Fill = color;
+            });
+        }
         public int Max(int[] num)
         {
             int max = 0;

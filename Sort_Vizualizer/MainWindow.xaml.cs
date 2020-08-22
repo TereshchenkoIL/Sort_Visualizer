@@ -39,7 +39,9 @@ namespace Sort_Vizualizer
             sortingThread = new Thread(() =>
             {
                 //Bubble_sort();
-                QuickSort();
+                // QuickSort();
+                MergeSort(0,arr.Length-1);
+                Show_Res();
             });
             sortingThread.Start();
 
@@ -51,13 +53,14 @@ namespace Sort_Vizualizer
         
             string[] strs = Numbers.Text.Split(' ');
             arr = new int[strs.Length];
-            rects = new Rectangle[strs.Length];
+            
             for(int i = 0; i < strs.Length; i++)
             {
                 arr[i] = int.Parse(strs[i]); 
             }
             if (arr.Min() < 0)
                 MAX_HEIGHT /= 2;
+            rects = new Rectangle[strs.Length];
 
             int dist = MAX_WIDTH / arr.Length;
 
@@ -114,6 +117,18 @@ namespace Sort_Vizualizer
                  rects[j] = temp;
              });          
         }
+        private void Set_Rect(int k, int j, Rectangle[] r)
+        {
+            this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
+            {
+                rects[k].Height = r[j].Height;
+                rects[k].Margin = new Thickness(r[j].Margin.Left, r[j].Margin.Top, 0, 0);
+                rects[k].Fill = Brushes.Orange;
+               // rects[k] = r[j];
+
+
+            });
+        }
 
         private void Swap(int i, int j)
         {
@@ -143,6 +158,7 @@ namespace Sort_Vizualizer
             }
 
         }
+        #region QuickSort
         private void QuickSort()
         {
             Quick(0, arr.Length-1);
@@ -189,7 +205,62 @@ namespace Sort_Vizualizer
             return j;
 
         }
-   
+        #endregion
+
+        private void MergeSort(int lo, int hi)
+        {
+            int[] aux = new int[arr.Length];
+            Rectangle[] rectangles = new Rectangle[rects.Length];
+            M_Sort(rectangles,aux, lo, hi);
+        }
+
+        private void M_Sort(Rectangle[] rectangles, int[] aux,int lo, int hi)
+        {
+            if (hi <= lo) return;
+
+                 int mid = lo + (hi - lo) / 2;
+
+ 
+                M_Sort(rectangles,aux,lo, mid);
+                M_Sort(rectangles, aux,mid + 1, hi);
+                Merge(rectangles, aux, lo, mid, hi);
+            
+        }
+
+        private void Merge(Rectangle[] rectangles,int[] aux, int lo, int mid, int hi)
+        {
+            for (int k = lo; k <= hi; k++)
+            {
+                aux[k] = arr[k];
+                rectangles[k] = rects[k];
+            }
+
+            int i = lo, j = mid + 1;
+            for (int k = lo; k <= hi; k++)
+            {
+                if (i > mid)
+                {                             
+                    arr[k] = aux[j++];           
+                }
+                else if (j > hi)
+                {             
+                    arr[k] = aux[i++];
+                }
+                else if (aux[j] < aux[i])
+                {  
+                    arr[k] = aux[j++];   
+                }
+                else
+                {
+                    arr[k] = aux[i++]; 
+                }
+                Redraw();
+                Thread.Sleep(450);
+            }
+
+        }
+
+
         public void Set_Orange(int i, int j)
         {
             this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
@@ -236,5 +307,61 @@ namespace Sort_Vizualizer
             return num[max] < 0 ? - num[max]: arr[max];
         }
 
-    }
+        private void Show_Res()
+        {
+            this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
+            {
+                string str = "";
+                foreach (var i in arr)
+                {
+                    str += i + " ";
+                }
+                Sorted.Text = str;
+            });
+        }
+
+        private void Redraw()
+        {
+            this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
+            {
+                Zone.Children.Clear();
+
+                rects = new Rectangle[arr.Length];
+
+                int dist = MAX_WIDTH / arr.Length;
+
+                int max = Max(arr);
+                int m_HEIGHT = MAX_HEIGHT / max;
+
+
+                for (int i = 0; i < rects.Length; i++)
+                {
+                    int width = 20;
+                    int height = 0;
+                    int top = 0;
+
+                    int left = dist * i;
+                    if (arr[i] < 0)
+                    {
+                        height = -1 * arr[i] * m_HEIGHT;
+                        top = MAX_HEIGHT;
+
+                    }
+                    else
+                    {
+                        height = m_HEIGHT * arr[i];
+                        top = MAX_HEIGHT - height;
+                    }
+
+                    Rectangle rect = new Rectangle();
+                    rect.Fill = Brushes.Green;
+                    rect.Height = height;
+                    rect.Width = width;
+                    rect.Margin = new Thickness(left, top, 0, 0);
+                    rects[i] = rect;
+                    Zone.Children.Add(rect);
+                }
+            });
+        }
+        }
 }

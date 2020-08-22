@@ -38,9 +38,11 @@ namespace Sort_Visualizer
         {
             sortingThread = new Thread(() =>
             {
-              //  Bubble_sort();
-                QuickSort();
-               // MergeSort(0,arr.Length-1);
+                //  Bubble_sort();
+                //  QuickSort();
+                // MergeSort(0,arr.Length-1);
+                //  Insertion_Sort();
+                Selection_Sort();
                 Show_Res();
             });
             sortingThread.Start();
@@ -206,7 +208,7 @@ namespace Sort_Visualizer
 
         }
         #endregion
-
+        #region MergeSort
         private void MergeSort(int lo, int hi)
         {
             int[] aux = new int[arr.Length];
@@ -258,6 +260,52 @@ namespace Sort_Visualizer
                 Thread.Sleep(450);
             }
 
+        }
+        #endregion
+        private void Insertion_Sort()
+        {
+            for(int i = 0; i < arr.Length; i++)
+            {
+                Set_Color(i, Brushes.Lime);
+                Thread.Sleep(250);
+                for(int j = i; j > 0; j--)
+                {
+                    Set_Color(j, Brushes.Purple);
+                    Thread.Sleep(150);
+                    if(arr[j] < arr[j-1])
+                    {
+                        Set_Orange(j, j - 1);
+                        Swap(j, j -1);
+                        Thread.Sleep(300);
+                        Set_Gray(j-1);
+                    }
+                    Set_Gray(j);
+                }
+            }
+        }
+
+        private void Selection_Sort()
+        {
+          
+            for(int i = 0; i < arr.Length; i++)
+            {
+                int min = i;
+                Set_Color(i, Brushes.Purple);
+                Thread.Sleep(100);
+                for(int j = i + 1; j < arr.Length; j++)
+                {
+                    Set_Color(j, Brushes.Blue);
+                    Thread.Sleep(100);
+                    if (arr[j] < arr[min]) min = j;
+                    Set_Color(j, Brushes.Green);
+                    Thread.Sleep(100);
+                }
+                Set_Color(min, Brushes.Red);
+                Thread.Sleep(300);
+                Set_Orange(i, min);
+                Swap(i, min);
+                Thread.Sleep(300);
+            }
         }
 
 

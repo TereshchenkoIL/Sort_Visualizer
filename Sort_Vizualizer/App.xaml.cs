@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Sort_Vizualizer
+namespace Sort_Visualizer
 {
     /// <summary>
     /// Логика взаимодействия для App.xaml

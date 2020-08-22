@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Sort_Vizualizer.Properties
+namespace Sort_Visualizer.Properties
 {
 
 

@@ -15,7 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 
-namespace Sort_Vizualizer
+namespace Sort_Visualizer
 {
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
@@ -38,9 +38,9 @@ namespace Sort_Vizualizer
         {
             sortingThread = new Thread(() =>
             {
-                //Bubble_sort();
-                // QuickSort();
-                MergeSort(0,arr.Length-1);
+              //  Bubble_sort();
+                QuickSort();
+               // MergeSort(0,arr.Length-1);
                 Show_Res();
             });
             sortingThread.Start();

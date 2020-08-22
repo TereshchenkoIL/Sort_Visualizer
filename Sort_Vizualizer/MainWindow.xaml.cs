@@ -28,6 +28,7 @@ namespace Sort_Visualizer
         int MAX_WIDTH = 800;
         Rectangle[] rects;
         Thread sortingThread;
+        string type = "";
         
         public MainWindow()
         {
@@ -36,13 +37,29 @@ namespace Sort_Visualizer
 
         private void Sort_Click(object sender, RoutedEventArgs e)
         {
+            if (type == "") return;
+            
             sortingThread = new Thread(() =>
             {
-                //  Bubble_sort();
-                //  QuickSort();
-                // MergeSort(0,arr.Length-1);
-                //  Insertion_Sort();
-                Selection_Sort();
+                switch(type)
+                {
+                    case "Сортировка пузырьком":
+                        Bubble_sort();
+                        break;
+                    case "Быстрая сортировка":
+                        QuickSort();
+                        break;
+                    case "Сортировка вставками":
+                       Insertion_Sort();
+                        break;
+                    case "Сортировка выбором":
+                        Selection_Sort();
+                        break;
+                    case "Сортировка слиянием":
+                       MergeSort(0,arr.Length - 1);
+                        break;
+                }
+               
                 Show_Res();
             });
             sortingThread.Start();
@@ -51,6 +68,7 @@ namespace Sort_Visualizer
 
         private void Init_Click(object sender, RoutedEventArgs e)
         {
+            Zone.Children.Clear();
             if(sortingThread != null)  sortingThread.Abort();
         
             string[] strs = Numbers.Text.Split(' ');
@@ -257,7 +275,7 @@ namespace Sort_Visualizer
                     arr[k] = aux[i++]; 
                 }
                 Redraw();
-                Thread.Sleep(450);
+                Thread.Sleep(300);
             }
 
         }
@@ -411,5 +429,13 @@ namespace Sort_Visualizer
                 }
             });
         }
+
+        private void Combox_Selected(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox box = (ComboBox)sender;
+            type = box.SelectedItem.ToString().Substring(37).Trim(); 
         }
+
+        //Todo Fix MergeSort
+    }
 }

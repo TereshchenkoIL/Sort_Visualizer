@@ -252,30 +252,37 @@ namespace Sort_Visualizer
             for (int k = lo; k <= hi; k++)
             {
                 aux[k] = arr[k];
-                rectangles[k] = rects[k];
+                Set_Color(k, Brushes.Red);
             }
-
+            Thread.Sleep(300);
             int i = lo, j = mid + 1;
             for (int k = lo; k <= hi; k++)
             {
                 if (i > mid)
                 {                             
-                    arr[k] = aux[j++];           
+                    arr[k] = aux[j++];
+                    Redraw();
+                    Thread.Sleep(100);
                 }
                 else if (j > hi)
                 {             
                     arr[k] = aux[i++];
+                    Redraw();
+                    Thread.Sleep(100);
                 }
                 else if (aux[j] < aux[i])
                 {  
-                    arr[k] = aux[j++];   
+                    arr[k] = aux[j++];
+                    Redraw();
+                    Thread.Sleep(100);
                 }
                 else
                 {
-                    arr[k] = aux[i++]; 
+                    arr[k] = aux[i++];
+                    Redraw();
+                    Thread.Sleep(100);
                 }
-                Redraw();
-                Thread.Sleep(300);
+               
             }
 
         }

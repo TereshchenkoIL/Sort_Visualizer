@@ -29,6 +29,7 @@ namespace Sort_Visualizer
         Rectangle[] rects;
         Thread sortingThread;
         string type = "";
+        int N;
         
         public MainWindow()
         {
@@ -58,6 +59,9 @@ namespace Sort_Visualizer
                     case "Сортировка слиянием":
                        MergeSort(0,arr.Length - 1);
                         break;
+                    case "HeapSort":
+                        HeapSort();
+                        break;
                 }
                
                 Show_Res();
@@ -78,6 +82,7 @@ namespace Sort_Visualizer
             {
                 arr[i] = int.Parse(strs[i]); 
             }
+            N = arr.Length;
             if (arr.Min() < 0)
                 MAX_HEIGHT /= 2;
             rects = new Rectangle[strs.Length];
@@ -287,6 +292,47 @@ namespace Sort_Visualizer
 
         }
         #endregion
+        #region HeapSort
+        private void Sink(int k)
+        {
+            while (2 * k <= N)
+            {
+                int j = 2 * k;
+                if (j < N && arr[j - 1] < arr[j]) j++;
+                if (arr[k - 1] >= arr[j - 1]) break;
+                Set_Orange(j - 1, k - 1);
+                Thread.Sleep(300);
+                Swap(k - 1, j - 1);
+                Thread.Sleep(300);
+                Set_Color(j - 1, k - 1, Brushes.Green);
+                k = j;
+            }
+        }
+        private void HeapSort()
+        {
+
+            for (int i = N / 2; i >= 1; i--)
+            {
+                Set_Color(i, Brushes.Purple);
+                Thread.Sleep(100);
+                Sink(i);
+                Set_Color(i, Brushes.Green);
+                Thread.Sleep(100);
+            }
+
+            while (N > 1)
+            {
+
+                Thread.Sleep(300);
+                Set_Color(0, N - 1, Brushes.Blue);
+                Thread.Sleep(100);
+                Swap(0, N - 1);
+                Set_Color(0, N - 1, Brushes.Green);
+                N--;
+                Sink(1);
+            }
+        }
+        #endregion
         private void Insertion_Sort()
         {
             for(int i = 0; i < arr.Length; i++)
@@ -363,6 +409,14 @@ namespace Sort_Visualizer
             this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
             {
                 rects[i].Fill = color;
+            });
+        }
+        public void Set_Color(int i,int j, SolidColorBrush color)
+        {
+            this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
+            {
+                rects[i].Fill = color;
+                rects[j].Fill = color;
             });
         }
         public int Max(int[] num)
@@ -443,6 +497,6 @@ namespace Sort_Visualizer
             type = box.SelectedItem.ToString().Substring(37).Trim(); 
         }
 
-        //Todo Fix MergeSort
+
     }
 }

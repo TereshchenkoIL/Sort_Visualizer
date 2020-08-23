@@ -18,6 +18,7 @@
                 <ComboBoxItem>Сортировка вставками</ComboBoxItem>
                 <ComboBoxItem>Сортировка выбором</ComboBoxItem>
                 <ComboBoxItem>Сортировка слиянием</ComboBoxItem>
+                <ComboBoxItem>HeapSort</ComboBoxItem>
             </ComboBox>
         </Grid>
         <Canvas x:Name="Zone" Margin="10,80,10,10"/>

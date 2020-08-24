@@ -62,6 +62,12 @@ namespace Sort_Visualizer
                     case "HeapSort":
                         HeapSort();
                         break;
+                    case  "Сортировка Шелла":
+                        ShellSort();
+                        break;
+                    case "Шейкерная сортировка":
+                        CoctailSort();
+                        break;
                 }
                
                 Show_Res();
@@ -333,6 +339,72 @@ namespace Sort_Visualizer
             }
         }
         #endregion
+        private void ShellSort()
+        {
+            int h = 1;
+
+            while (h < N / 3) h = 3 * h + 1;
+
+            while(h >= 1)
+            {
+                for(int i = h; i < N; i++ )
+                {
+                    for(int j = i; j >= h && arr[j] < arr[j-h]; j-=h)
+                    {
+                        Set_Orange(j, j - h);
+                        Thread.Sleep(50);
+                        Swap(j, j - h);
+                        Thread.Sleep(300);
+                        Set_Color(j, j - h, Brushes.Green);
+                    }
+                }
+                h /= 3;
+            }
+        }
+        private void CoctailSort()
+        {
+            int left = 0;
+            int right = arr.Length - 1;
+
+            while(left < right)
+            {
+                for(int i = left; i < right; i++)
+                {
+                    if(arr[i] > arr[i+1])
+                    {
+                        Set_Orange(i, i + 1);
+                        Thread.Sleep(100);
+                        Swap(i, i + 1);
+                        Set_Color(i, i + 1, Brushes.Green);
+                        Thread.Sleep(300);
+                    }
+                }
+                Set_Color(right, Brushes.Purple);
+                Thread.Sleep(100);
+                right -= 1;
+                for(int i = right; i > left; i--)
+                {
+                   
+                    if (arr[i] < arr[i-1])
+                    {
+                        Set_Orange(i, i - 1);
+                        Thread.Sleep(100);
+                        Swap(i, i - 1);
+                        Set_Color(i, i -1, Brushes.Green);
+                        Thread.Sleep(300);
+                    }
+                }
+                Set_Color(left, Brushes.Purple);
+                left += 1;
+
+
+
+            }
+            Set_Color(left, Brushes.Purple);
+          
+
+            
+        }
         private void Insertion_Sort()
         {
             for(int i = 0; i < arr.Length; i++)

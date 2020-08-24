@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Sort_Visualizer"
         mc:Ignorable="d"
-        Title="MainWindow" Height="622" Width="864">
+        Title="MainWindow" Height="622" Width="864" ResizeMode="NoResize">
     <Grid Margin="0,0,0,4">
         <Grid Margin="0,0,0,512" Background="#54da00">
             <Button Content="Initialyze" HorizontalAlignment="Left" Height="25" Margin="380,40,0,0" VerticalAlignment="Top" Width="110" Click="Init_Click"/>
@@ -19,6 +19,8 @@
                 <ComboBoxItem>Сортировка выбором</ComboBoxItem>
                 <ComboBoxItem>Сортировка слиянием</ComboBoxItem>
                 <ComboBoxItem>HeapSort</ComboBoxItem>
+                <ComboBoxItem>Сортировка Шелла</ComboBoxItem>
+                <ComboBoxItem>Шейкерная сортировка</ComboBoxItem>
             </ComboBox>
         </Grid>
         <Canvas x:Name="Zone" Margin="10,80,10,10"/>

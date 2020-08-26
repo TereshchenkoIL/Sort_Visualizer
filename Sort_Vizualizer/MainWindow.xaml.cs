@@ -71,6 +71,9 @@ namespace Sort_Visualizer
                     case "Поразрядная сортировка":
                         RadixSort();
                         break;
+                    case "Гномья сортировка":
+                        GnomeSort();
+                        break;
                 }
                
                 Show_Res();
@@ -304,6 +307,32 @@ namespace Sort_Visualizer
             }
         }
         #endregion
+        private void GnomeSort()
+        {
+
+            int i = 1;
+            while(i < arr.Length)
+            {
+                Set_Color(i, Brushes.Purple);
+                Thread.Sleep(250);
+                if (i == 0 || arr[i] >= arr[i-1])
+                {
+                    Set_Color(i, Brushes.Green);
+                    Thread.Sleep(100);
+                    i++;
+                    
+                }else
+                {
+                    Set_Color(i, i - 1, Brushes.Orange);
+                    Thread.Sleep(300);
+                    Swap(i, i - 1);
+                    Set_Color(i, i - 1, Brushes.Green);
+                    Set_Color(i, Brushes.Green);
+                    Thread.Sleep(100);
+                    i--;
+                }
+            }
+        }
         private void ShellSort()
         {
             int h = 1;

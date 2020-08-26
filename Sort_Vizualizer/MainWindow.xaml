@@ -22,6 +22,7 @@
                 <ComboBoxItem>Сортировка Шелла</ComboBoxItem>
                 <ComboBoxItem>Шейкерная сортировка</ComboBoxItem>
                 <ComboBoxItem>Поразрядная сортировка</ComboBoxItem>
+                <ComboBoxItem>Гномья сортировка</ComboBoxItem>
             </ComboBox>
         </Grid>
         <Canvas x:Name="Zone" Margin="10,80,10,10"/>

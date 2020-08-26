@@ -68,6 +68,9 @@ namespace Sort_Visualizer
                     case "Шейкерная сортировка":
                         CoctailSort();
                         break;
+                    case "Поразрядная сортировка":
+                        RadixSort();
+                        break;
                 }
                
                 Show_Res();
@@ -78,7 +81,7 @@ namespace Sort_Visualizer
 
         private void Init_Click(object sender, RoutedEventArgs e)
         {
-            Zone.Children.Clear();
+           
             if(sortingThread != null)  sortingThread.Abort();
         
             string[] strs = Numbers.Text.Split(' ');
@@ -88,46 +91,8 @@ namespace Sort_Visualizer
             {
                 arr[i] = int.Parse(strs[i]); 
             }
-            N = arr.Length;
-            if (arr.Min() < 0)
-                MAX_HEIGHT /= 2;
-            rects = new Rectangle[strs.Length];
 
-            int dist = MAX_WIDTH / arr.Length;
-
-            int max = Max(arr);
-            int m_HEIGHT = MAX_HEIGHT / max;
-         
-
-            for(int i = 0; i < rects.Length; i++)
-            {
-                int width = 20;
-                int height = 0;
-                int top = 0;
-
-                int left = dist * i;
-                if(arr[i] < 0)
-                {
-                    height =  -1*arr[i] * m_HEIGHT ;
-                    top = MAX_HEIGHT ;
-
-                }
-                else
-                {
-                    height =  m_HEIGHT * arr[i];
-                    top = MAX_HEIGHT - height;
-                }
-               
-                Rectangle rect = new Rectangle();
-                rect.Fill = Brushes.Green;
-                rect.Height = height;
-                rect.Width = width;
-                rect.Margin = new Thickness(left, top, 0, 0);
-                rects[i] = rect;
-                Zone.Children.Add(rect);
-
-                
-            }
+            Draw();
 
         }
 
@@ -272,25 +237,25 @@ namespace Sort_Visualizer
                 if (i > mid)
                 {                             
                     arr[k] = aux[j++];
-                    Redraw();
+                    Draw();
                     Thread.Sleep(100);
                 }
                 else if (j > hi)
                 {             
                     arr[k] = aux[i++];
-                    Redraw();
+                    Draw();
                     Thread.Sleep(100);
                 }
                 else if (aux[j] < aux[i])
                 {  
                     arr[k] = aux[j++];
-                    Redraw();
+                    Draw();
                     Thread.Sleep(100);
                 }
                 else
                 {
                     arr[k] = aux[i++];
-                    Redraw();
+                    Draw();
                     Thread.Sleep(100);
                 }
                
@@ -405,6 +370,61 @@ namespace Sort_Visualizer
 
             
         }
+        #region RadixSort
+        private  void CountingSort( int exp)
+        {
+            int[] buf = new int[10];
+            int[] output = new int[arr.Length];
+
+            for (int i = 0; i < arr.Length; i++)
+            {
+                buf[(arr[i] / exp) % 10]++;
+            }
+
+            for (int i = 1; i < 10; i++)
+            {
+                buf[i] += buf[i - 1];
+            }
+
+            for (int i = arr.Length - 1; i >= 0; i--)
+            {
+                Set_Color(i, Brushes.Red);
+                Thread.Sleep(100);
+                output[buf[(arr[i] / exp) % 10] - 1] = arr[i];
+                buf[(arr[i] / exp) % 10]--;
+                Set_Color(i, Brushes.Green);
+                Thread.Sleep(50);
+            }
+            Thread.Sleep(100);
+            Array.Copy(output, arr, arr.Length);
+            Draw();
+            Thread.Sleep(200);
+        }
+
+        private  void RadixSort()
+        {
+            int m = GetMax();
+
+            for (int exp = 1; m / exp > 0; exp *= 10)
+            {
+                CountingSort( exp);
+            }
+        }
+
+        private  int GetMax()
+        {
+            int max = arr[0];
+
+            foreach (var i in arr)
+            {
+                if (i > max) max = i;
+            }
+            return max;
+        }
+
+
+
+        #endregion
         private void Insertion_Sort()
         {
             for(int i = 0; i < arr.Length; i++)
@@ -519,12 +539,14 @@ namespace Sort_Visualizer
             });
         }
 
-        private void Redraw()
+        private void Draw()
         {
             this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
             {
                 Zone.Children.Clear();
-
+                N = arr.Length;
+                if (arr.Min() < 0)
+                    MAX_HEIGHT /= 2;
                 rects = new Rectangle[arr.Length];
 
                 int dist = MAX_WIDTH / arr.Length;
@@ -559,6 +581,8 @@ namespace Sort_Visualizer
                     rect.Margin = new Thickness(left, top, 0, 0);
                     rects[i] = rect;
                     Zone.Children.Add(rect);
+
+
                 }
             });
         }

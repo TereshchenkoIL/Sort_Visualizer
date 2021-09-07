@@ -15,7 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 
-namespace Sort_Visualizer
+namespace Sort_Visualizer.Visualization
 {
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml

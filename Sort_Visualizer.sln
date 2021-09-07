@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29215.179
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sort_Visualizer", "Sort_Vizualizer\Sort_Visualizer.csproj", "{DA34E8F6-85A7-49AF-A2C8-029463C2CBA3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sort_Visualizer.Visualization", "Sort_Vizualizer\Sort_Visualizer.Visualization.csproj", "{DA34E8F6-85A7-49AF-A2C8-029463C2CBA3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sort_Vizualizer.Core", "Sort_Vizualizer.Core\Sort_Vizualizer.Core.csproj", "{BCC60274-5591-494D-B089-518CB52BCA0A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{DA34E8F6-85A7-49AF-A2C8-029463C2CBA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DA34E8F6-85A7-49AF-A2C8-029463C2CBA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DA34E8F6-85A7-49AF-A2C8-029463C2CBA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BCC60274-5591-494D-B089-518CB52BCA0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCC60274-5591-494D-B089-518CB52BCA0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCC60274-5591-494D-B089-518CB52BCA0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCC60274-5591-494D-B089-518CB52BCA0A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Sort_Vizualizer.Core.SortingAlgorithms;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -42,40 +43,13 @@ namespace Sort_Visualizer.Visualization
             
             sortingThread = new Thread(() =>
             {
-                switch(type)
-                {
-                    case "Сортировка пузырьком":
-                        Bubble_sort();
-                        break;
-                    case "Быстрая сортировка":
-                        QuickSort();
-                        break;
-                    case "Сортировка вставками":
-                       Insertion_Sort();
-                        break;
-                    case "Сортировка выбором":
-                        Selection_Sort();
-                        break;
-                    case "Сортировка слиянием":
-                       MergeSort(0,arr.Length - 1);
-                        break;
-                    case "HeapSort":
-                        HeapSort();
-                        break;
-                    case  "Сортировка Шелла":
-                        ShellSort();
-                        break;
-                    case "Шейкерная сортировка":
-                        CoctailSort();
-                        break;
-                    case "Поразрядная сортировка":
-                        RadixSort();
-                        break;
-                    case "Гномья сортировка":
-                        GnomeSort();
-                        break;
-                }
-               
+                var sorting = new InsertionSort();
+                sorting.SetItems(arr);
+                sorting.ColorItem += Set_Color;
+                sorting.ItemsSwapped += Swap_Rect;
+                sorting.Sleep += (int ms) => Thread.Sleep(ms);
+                sorting.Sort();
+                arr = sorting.Items;
                 Show_Res();
             });
             sortingThread.Start();
@@ -138,25 +112,7 @@ namespace Sort_Visualizer.Visualization
             Swap_Rect(i, j);
         }
 
-        private void Bubble_sort()
-        {
-            int temp;
-            for (int i = 0; i < arr.Length; i++)
-            {
-                for (int j = i + 1; j < arr.Length; j++)
-                {
-                    Set_Orange(i, j);
-                    if (arr[j] < arr[i])
-                    {
-                        Swap(i, j);
-                    }
-                    Thread.Sleep(300);
-                    Set_Red(i, j);
-                }
-                Set_Gray(i);
-            }
 
-        }
         #region QuickSort
         private void QuickSort()
         {
@@ -454,51 +410,8 @@ namespace Sort_Visualizer.Visualization
 
 
         #endregion
-        private void Insertion_Sort()
-        {
-            for(int i = 0; i < arr.Length; i++)
-            {
-                Set_Color(i, Brushes.Lime);
-                Thread.Sleep(250);
-                for(int j = i; j > 0; j--)
-                {
-                    Set_Color(j, Brushes.Purple);
-                    Thread.Sleep(150);
-                    if(arr[j] < arr[j-1])
-                    {
-                        Set_Orange(j, j - 1);
-                        Swap(j, j -1);
-                        Thread.Sleep(300);
-                        Set_Gray(j-1);
-                    }
-                    Set_Gray(j);
-                }
-            }
-        }
 
-        private void Selection_Sort()
-        {
-          
-            for(int i = 0; i < arr.Length; i++)
-            {
-                int min = i;
-                Set_Color(i, Brushes.Purple);
-                Thread.Sleep(100);
-                for(int j = i + 1; j < arr.Length; j++)
-                {
-                    Set_Color(j, Brushes.Blue);
-                    Thread.Sleep(100);
-                    if (arr[j] < arr[min]) min = j;
-                    Set_Color(j, Brushes.Green);
-                    Thread.Sleep(100);
-                }
-                Set_Color(min, Brushes.Red);
-                Thread.Sleep(300);
-                Set_Orange(i, min);
-                Swap(i, min);
-                Thread.Sleep(300);
-            }
-        }
+       
 
 
         public void Set_Orange(int i, int j)
@@ -530,6 +443,14 @@ namespace Sort_Visualizer.Visualization
             this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
             {
                 rects[i].Fill = color;
+            });
+        }
+        public void Set_Color(int i, string str)
+        {
+            Color color = (Color)ColorConverter.ConvertFromString(str);
+            this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
+            {
+                rects[i].Fill = new SolidColorBrush(color);
             });
         }
         public void Set_Color(int i,int j, SolidColorBrush color)

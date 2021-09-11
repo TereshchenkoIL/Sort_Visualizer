@@ -121,5 +121,11 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Sort_Vizualizer.Core\Sort_Vizualizer.Core.csproj">
+      <Project>{bcc60274-5591-494d-b089-518cb52bca0a}</Project>
+      <Name>Sort_Vizualizer.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

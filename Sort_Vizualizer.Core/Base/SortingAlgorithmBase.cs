@@ -5,13 +5,13 @@ using System.Text;
 
 namespace Sort_Vizualizer.Core.Base
 {
-    abstract class SortingAlgorithmBase : ISortingAlgorithm
+    public abstract class SortingAlgorithmBase : ISortingAlgorithm
     {
         public int[] Items { get; protected set; }
 
         public int[] SortedItems { get; protected set; }
 
-        public int Length { get; protected set; }
+        public int Length { get => Items.Length;  }
 
         public event Action<int> Sleep;
         public event Action<int, string> ColorItem;

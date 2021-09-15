@@ -54,6 +54,7 @@ namespace Sort_Vizualizer.Core.SortingAlgorithms
 
             }
             OnColorItem(left, "Purple");
+            SortedItems = arr;
         }
     }
 }

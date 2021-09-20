@@ -37,8 +37,8 @@ namespace Sort_Vizualizer.Core.SortingAlgorithms
             {
                 int j = 2 * k + 1;
 
-                if (j < n && arr[j] < arr[j + 1]) j++;
-                if (arr[k] >= arr[j]) break;
+                if (j < n - 1 && arr[j] < arr[j + 1]) j++;
+                if (j >= n || arr[k] >= arr[j]) break;
                 OnColorItem(k, "Orange");
                 OnColorItem(j, "Orange");
                 OnSleep(300);

@@ -9,7 +9,10 @@ namespace Sort_Vizualizer.Core.SortingAlgorithms
     {
         public override void Sort()
         {
-            base.Sort();
+            var arr = (int[])Items.Clone();
+
+            Sort(0, arr.Length - 1, arr);
+            SortedItems = arr;
         }
         private void Sort(int left, int right, int[] arr)
         {

@@ -205,20 +205,19 @@
                 <ColumnDefinition Width="144*"/>
             </Grid.ColumnDefinitions>
             <Button Content="Initialyze"  HorizontalAlignment="Left" Height="25" Margin="35,40,0,0" VerticalAlignment="Top" Width="110" Click="Init_Click" Style="{StaticResource  Btn}" Grid.Column="1"/>
-            <TextBox x:Name="Numbers" HorizontalAlignment="Left" Height="25" Grid.Column="0" Margin="15,20,0,0" TextWrapping="Wrap" Text="Введите числа" VerticalAlignment="Top" Width="325" Foreground="Green"/>
+            <TextBox x:Name="Numbers" HorizontalAlignment="Left" Height="25" Grid.Column="0" Margin="15,20,0,0" TextWrapping="Wrap" Text="5 8 1 2 10 4 6 3" VerticalAlignment="Top" Width="325" Foreground="Green"/>
             <Button Content="Сортировать"  HorizontalAlignment="Left" Height="30" Margin="15,5,0,0" VerticalAlignment="Top" Width="145" Click="Sort_Click" Style="{StaticResource  Btn}" Grid.Column="1" />
             <TextBox x:Name="Sorted" IsReadOnly="True" Grid.Column="2" HorizontalAlignment="Left" Height="25" Margin="5,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="240" Foreground="Green"/>
             <ComboBox HorizontalAlignment="Left" Grid.Column="2" Height="25" Margin="40,40,0,0" VerticalAlignment="Top" Width="160" SelectionChanged="Combox_Selected" BorderBrush="Purple" >
-                <ComboBoxItem>Сортировка пузырьком</ComboBoxItem>
-                <ComboBoxItem>Быстрая сортировка</ComboBoxItem>
-                <ComboBoxItem>Сортировка вставками</ComboBoxItem>
-                <ComboBoxItem>Сортировка выбором</ComboBoxItem>
-                <ComboBoxItem>Сортировка слиянием</ComboBoxItem>
+                <ComboBoxItem>BubbleSort</ComboBoxItem>
+                <ComboBoxItem>QuickSort</ComboBoxItem>
+                <ComboBoxItem>InsertionSort</ComboBoxItem>
+                <ComboBoxItem>SelectionSort</ComboBoxItem>
+                <ComboBoxItem>MergeSort</ComboBoxItem>
                 <ComboBoxItem>HeapSort</ComboBoxItem>
-                <ComboBoxItem>Сортировка Шелла</ComboBoxItem>
-                <ComboBoxItem>Шейкерная сортировка</ComboBoxItem>
-                <ComboBoxItem>Поразрядная сортировка</ComboBoxItem>
-                <ComboBoxItem>Гномья сортировка</ComboBoxItem>
+                <ComboBoxItem>ShellSor</ComboBoxItem>
+                <ComboBoxItem>CoctailSort</ComboBoxItem>
+                <ComboBoxItem>GnomeSort</ComboBoxItem>
             </ComboBox>
         </Grid>
         <Canvas x:Name="Zone" Margin="10,80,10,10" Grid.ColumnSpan="2"/>

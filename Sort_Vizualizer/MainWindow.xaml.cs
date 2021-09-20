@@ -1,4 +1,5 @@
 ﻿using Sort_Vizualizer.Core.SortingAlgorithms;
+using Sort_Vizualizer.Core.Factory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,7 +44,7 @@ namespace Sort_Visualizer.Visualization
             
             sortingThread = new Thread(() =>
             {
-                var sorting = new InsertionSort();
+                var sorting = AlgorithmFactory.Create(type);
                 sorting.SetItems(arr);
                 sorting.ColorItem += Set_Color;
                 sorting.ItemsSwapped += Swap_Rect;
